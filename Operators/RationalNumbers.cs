@@ -10,11 +10,11 @@ namespace Operators
     internal class RationalNumbers
     {
         public long numerator { get; }
-        public long denominator { get; }
+        public long denominator { get; } //поля для числителя и знаменателя
 
-        public RationalNumbers(long numerator, long denominator)
+        public RationalNumbers(long numerator, long denominator) //Конструктор принимает два параметра: числитель и знаменатель.
         {
-            if (denominator == 0) throw new ArgumentException("The denominator cannot be equal to zero.");
+            if (denominator == 0) throw new ArgumentException("The denominator cannot be equal to zero."); //Проверка на нулевой знаменатель и выброс исключения типа ArgumentException.
             this.numerator = numerator;
             this.denominator = denominator;
         }
@@ -22,7 +22,7 @@ namespace Operators
         public static RationalNumbers operator +(RationalNumbers left, RationalNumbers right)
         {
             long numerator = left.numerator * right.denominator + right.numerator * left.denominator;
-            long denominator = left.denominator * right.denominator;
+            long denominator = left.denominator * right.denominator; //Перегрузка операторов +, -, *, / для выполнения арифметических операций с двумя объектами типа RationalNumbers
 
             return new RationalNumbers(numerator, denominator);
         }
@@ -45,7 +45,7 @@ namespace Operators
 
         public static RationalNumbers operator /(RationalNumbers left, RationalNumbers right)
         {
-            if (left.denominator == 0) throw new DivideByZeroException("The denominator cannot be equal to zero.");
+            if (left.denominator == 0) throw new DivideByZeroException("The denominator cannot be equal to zero."); //Проверка на нулевой знаменатель и выброс исключения типа DivideByZeroException.
 
             long numerator = left.numerator * right.denominator;
             long denominator = right.numerator * left.denominator;
@@ -70,12 +70,13 @@ namespace Operators
 
         public static bool operator !=(RationalNumbers left, RationalNumbers right)
         {
-            return left.numerator * right.denominator != right.numerator * left.denominator;
+            return left.numerator * right.denominator != right.numerator * left.denominator; //Перегрузка операторов >, <, ==, != для сравнения объектов типа RationalNumbers.
+
         }
 
-        public override string ToString()
+        public override string ToString() //Переопределение метода ToString() для вывода рациональных чисел в строковом виде – в виде числителя и знаменателя.
         {
-            return $"{numerator}/{denominator}";
+            return $"{numerator}/{denominator}"; //Возврат строки вида "числитель/знаменатель".
         }
     }
 }
